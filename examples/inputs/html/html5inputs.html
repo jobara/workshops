@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 Inputs</title>
+        <link rel="stylesheet" type="text/css" href="../css/html5inputs.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Fluid Travel Finder</h1>
+            <form>
+                <input type="text" name="search" placeholder="Find Your Destination"/>
+                <input type="submit" value="search" />
+            </form>
+        </header>
+        <section>
+            <form>
+                <ol>
+                    <li>
+                        <h2>Trip Details</h2>
+                        <ol>
+                            <li>
+                                <label for="origin">Origin</label>
+                                <input id="origin" list="origin_cities" placeholder="Toronto" autofocus />
+                                <datalist id="origin_cities">
+                                    <option value="Edmonton"> 
+                                    <option value="Montreal">
+                                    <option value="Ottawa">
+                                    <option value="Vancouver">
+                                    <option value="Toronto">
+                                </datalist>
+                            </li>
+                            <li>
+                                <label for="origin">Destination</label>
+                                <input id="origin" list="destination_cities" placeholder="Montreal" />
+                                <datalist id="destination_cities">
+                                    <option value="Edmonton"> 
+                                    <option value="Montreal">
+                                    <option value="Ottawa">
+                                    <option value="Vancouver">
+                                    <option value="Toronto">
+                                </datalist>
+                            </li>
+                            <li>
+                                <ol>
+                                    <li>
+                                        <label for="departure">Departure Date:</label>
+                                        <input type="date" id="departure" placeholder="yyyy-mm-dd" />
+                                    </li>
+                                    <li>
+                                        <label for="return">Return Date:</label>
+                                        <input type="date" id="return" placeholder="yyyy-mm-dd" />
+                                    </li>
+                                    <li>
+                                        <!-- Sliders may not be that useful to show on there own, without js accompaniment -->
+                                        <label for="flexibility">Flexibility</label>
+                                        <input type="range" id="flexibility" min="-3" max="3" step="1" value="0" />
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <label for="num_travelers">Number of Travellers</label>
+                                <input type="number" id="num_travelers" min="1" max="10" step="1" value="1">
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h2>Contact Information</h2>
+                        <ol>
+                            <li>
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" placeholder="My name is ..." />
+                            </li>
+                            <li>
+                                <label for="phone_number">Phone #:</label>
+                                <input type="tel" id="phone_number" placeholder="555-555-5555" />
+                            </li>
+                            <li>
+                                <label for="email">E-Mail:</label>
+                                <input type="email" id="email" placeholder="my@email.com" />
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <input type="submit" id="book_trip" value="Book My Trip">
+                    </li>
+                </ol>
+            </form>
+        </section>
+    </body>
+</html>
