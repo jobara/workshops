@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>HTML5 Inputs</title>
+        <link rel="stylesheet" type="text/css" href="../../../infusion/framework/fss/css/fss-reset-global.css">
         <link rel="stylesheet" type="text/css" href="../css/html5inputs.css" />
     </head>
     <body>
@@ -13,7 +14,7 @@
                 <input type="submit" value="search" />
             </form>
         </header>
-        <section>
+        <section class="trip_picker">
             <form>
                 <ol>
                     <li>
@@ -44,11 +45,11 @@
                             <li>
                                 <ol>
                                     <li>
-                                        <label for="departure">Departure Date:</label>
+                                        <label for="departure">Departure Date</label>
                                         <input type="date" id="departure" placeholder="yyyy-mm-dd" />
                                     </li>
                                     <li>
-                                        <label for="return">Return Date:</label>
+                                        <label for="return">Return Date</label>
                                         <input type="date" id="return" placeholder="yyyy-mm-dd" />
                                     </li>
                                     <li>
@@ -68,15 +69,15 @@
                         <h2>Contact Information</h2>
                         <ol>
                             <li>
-                                <label for="name">Name:</label>
+                                <label for="name">Name</label>
                                 <input type="text" id="name" placeholder="My name is ..." />
                             </li>
                             <li>
-                                <label for="phone_number">Phone #:</label>
+                                <label for="phone_number">Phone #</label>
                                 <input type="tel" id="phone_number" placeholder="555-555-5555" />
                             </li>
                             <li>
-                                <label for="email">E-Mail:</label>
+                                <label for="email">E-Mail</label>
                                 <input type="email" id="email" placeholder="my@email.com" />
                             </li>
                         </ol>
