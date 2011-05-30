@@ -8,24 +8,20 @@
         <link rel="stylesheet" type="text/css" href="../css/html5inputs.css" />
     </head>
     <body>
-        <div class="trip_picker centre_block fl-container-600">
-            <header class="fl-col-mixed-175">
+        <div class="trip_picker centre_block shaddow rounded_corners fl-container-650">
+            <header class="rounded_corners_top fl-col-mixed-175">
                 <span class="fl-col-fixed fl-force-right">
-                    <img src="../images/fluid_logo_small.png" class=" fl-force-right" alt="Fluid Logo">
+                    <img src="../images/fluid_logo_small.png" class="fl-force-right" alt="Fluid Logo">
                 </span>
-                <div class="fl-col-flex-left perforrated">
+                <div class="perforrated fl-col-flex-left">
                     <h1>Fluid Travel Finder</h1>
-                    <form>
-                        <input type="search" name="search" placeholder="Search Packages"/>
-                        <input type="submit" value="search" />
-                    </form>
                 </div>
             </header>
             <section class="fl-col-mixed">
                 <form>
                     <ol>
                         <li class="fl-col-fixed fl-force-right">
-                            <h2>Contact Information</h2>
+                            <h2 class="contact_info">Contact Information</h2>
                             <ol>
                                 <li>
                                     <label for="name">Name</label>
@@ -41,27 +37,28 @@
                                 </li>
                                 <li>
                                     <input type="submit" id="book_trip" value="Book My Trip">
+                                    <img src="../images/qr_code.png" class="qr_code fl-force-right" alt="qr code to http://fluidproject.org">
                                 </li>
                             </ol>
                         </li>
-                        <li class="fl-col-flex-left perforrated">
+                        <li class="perforrated fl-col-flex-left">
                             <h2>Trip Details</h2>
                             <ol>
-                                <li class="fl-col-flex2">
+                                <li class="fl-col-flex2 fl-clearfix">
                                     <div class="fl-col">
-                                        <fieldset>
+                                        <fieldset class="fl-force-left">
                                             <legend>Departure:</legend>
-                                            <label for="origin">City</label>
-                                            <input id="origin" list="origin_cities" placeholder="Toronto" autofocus />
-                                            <datalist id="origin_cities">
-                                                <option value="Edmonton"> 
-                                                <option value="Montreal">
-                                                <option value="Ottawa">
-                                                <option value="Vancouver">
-                                                <option value="Toronto">
-                                            </datalist>
-                                            <label for="departure">Departure Date</label>
-                                            <input type="date" id="departure" placeholder="yyyy-mm-dd" />
+                                                <label for="origin">City</label>
+                                                <input id="origin" list="origin_cities" placeholder="Toronto" autofocus />
+                                                <datalist id="origin_cities">
+                                                    <option value="Edmonton"> 
+                                                    <option value="Montreal">
+                                                    <option value="Ottawa">
+                                                    <option value="Vancouver">
+                                                    <option value="Toronto">
+                                                </datalist>
+                                                <label for="departure">Departure Date</label>
+                                                <input type="date" id="departure" value="2011-06-01" />
                                         </fieldset>
                                     </div>
                                     <div class="fl-col">
@@ -77,7 +74,7 @@
                                                 <option value="Toronto">
                                             </datalist>
                                             <label for="return">Return Date</label>
-                                            <input type="date" id="return" placeholder="yyyy-mm-dd" />
+                                            <input type="date" id="return" value="2011-06-02" />
                                         </fieldset>
                                     </div>
                                 </li>
@@ -89,7 +86,7 @@
                                         </li>
                                     </ol>
                                     <span class="fl-col">
-                                        <img src="../images/qr_code.png" class="qr_code fl-force-right" alt="qr code to http://fluidproject.org">
+                                        <img src="../images/barcode.png" class="barcode fl-force-right" alt="barcode for http://fluidproject.org">
                                     <span>
                                 </li>
                             </ol>
@@ -98,5 +95,11 @@
                 </form>
             </section>
         </div>
+        <footer class="search_packages centre_block shaddow rounded_corners fl-container-250">
+            <form>
+                <input type="search" placeholder="I'd like to go...">
+                <input type="submit" value="Search">
+            </form>
+        </footer>
     </body>
 </html>
