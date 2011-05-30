@@ -34,6 +34,11 @@ header {
     background: linear-gradient(top, #cedce7 0%,#596a72 100%); /* W3C */
 }
 
+input {
+    padding: 1px 0px;
+    text-align: left;
+}
+
 li {
     margin-top: 16px;
 }
@@ -89,6 +94,15 @@ fieldset > * {
 
 .contact_info {
     margin-top: -16px;
+}
+
+.date {
+    min-width: 85px;
+}
+
+.search,
+.button {
+    padding: 1px 8px;
 }
 
 .trip_picker {

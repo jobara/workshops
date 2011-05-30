@@ -36,7 +36,7 @@
                                     <input type="email" id="email" placeholder="my@email.com" />
                                 </li>
                                 <li>
-                                    <input type="submit" id="book_trip" value="Book My Trip">
+                                    <input type="submit" id="book_trip" class="button" value="Book My Trip">
                                     <img src="../images/qr_code.png" class="qr_code fl-force-right" alt="qr code to http://fluidproject.org">
                                 </li>
                             </ol>
@@ -49,34 +49,37 @@
                                         <fieldset class="fl-force-left">
                                             <legend>Departure:</legend>
                                                 <label for="origin">City</label>
-                                                <input id="origin" list="origin_cities" placeholder="Toronto" autofocus />
-                                                <datalist id="origin_cities">
-                                                    <option value="Edmonton"> 
-                                                    <option value="Montreal">
-                                                    <option value="Ottawa">
-                                                    <option value="Vancouver">
-                                                    <option value="Toronto">
-                                                </datalist>
+                                                <input id="origin" list="cities" placeholder="Toronto" autofocus />
                                                 <label for="departure">Departure Date</label>
-                                                <input type="date" id="departure" value="2011-06-01" />
+                                                <input type="date" id="departure" class="date" value="2011-06-01" />
                                         </fieldset>
                                     </div>
                                     <div class="fl-col">
                                         <fieldset class="fl-force-right">
                                             <legend>Arrival:</legend>
                                             <label for="origin">City</label>
-                                            <input id="origin" list="destination_cities" placeholder="Montreal" />
-                                            <datalist id="destination_cities">
-                                                <option value="Edmonton"> 
-                                                <option value="Montreal">
-                                                <option value="Ottawa">
-                                                <option value="Vancouver">
-                                                <option value="Toronto">
-                                            </datalist>
+                                            <input id="origin" list="cities" placeholder="Montreal" />
                                             <label for="return">Return Date</label>
-                                            <input type="date" id="return" value="2011-06-02" />
+                                            <input type="date" id="return" class="date" value="2011-06-02" />
                                         </fieldset>
                                     </div>
+                                    <datalist id="cities">
+                                        <option value="Amsterdam">
+                                        <option value="Barcelona">
+                                        <option value="Calgary">
+                                        <option value="Edmonton"> 
+                                        <option value="Fresno">
+                                        <option value="Geneva">
+                                        <option value="Istanbul">
+                                        <option value="Jakarta">
+                                        <option value="Kuala Lumpur">
+                                        <option value="Montreal">
+                                        <option value="New York">
+                                        <option value="Ottawa">
+                                        <option value="Quebec City">
+                                        <option value="Toronto">
+                                        <option value="Vancouver">
+                                    </datalist>
                                 </li>
                                 <li class="fl-col-flex2">
                                     <ol class="fl-col">
@@ -97,8 +100,8 @@
         </div>
         <footer class="search_packages centre_block shaddow rounded_corners fl-container-250">
             <form>
-                <input type="search" placeholder="I'd like to go...">
-                <input type="submit" value="Search">
+                <input type="search" class="search" placeholder="I'd like to go to...">
+                <input type="submit" class="button" value="Search">
             </form>
         </footer>
     </body>
