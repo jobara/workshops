@@ -10,7 +10,10 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
 // Declare dependencies
-/*global demo:true, fluid, jQuery*/
+/*global navigator, demo:true, fluid, jQuery*/
+
+// JSLint options 
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var demo = demo || {};
 
@@ -47,7 +50,7 @@ var demo = demo || {};
     demo.geoLocator.geoLocate = function (success, error) {
         if (!!navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(success, error);
-        } else if (error){
+        } else if (error) {
             error({
                 code: 0
             });
