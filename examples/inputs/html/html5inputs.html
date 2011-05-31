@@ -3,13 +3,17 @@
     <head>
         <meta charset="utf-8" />
         <title>HTML5 Inputs</title>
+        
         <link rel="stylesheet" type="text/css" href="../../../infusion/framework/fss/css/fss-reset-global.css">
         <link rel="stylesheet" type="text/css" href="../../../infusion/framework/fss/css/fss-layout.css">
         <link rel="stylesheet" type="text/css" href="../css/html5inputs.css" />
+        
+        <script type="text/javascript" src="../../../infusion/MyInfusion.js"></script>
+        <script type="text/javascript" src="../js/html5inputs.js"></script>
     </head>
     <body>
         <div class="trip_picker centre_block shaddow rounded_corners fl-container-650">
-            <header class="rounded_corners_top fl-col-mixed-175">
+            <header class="heading fl-col-mixed-175">
                 <span class="fl-col-fixed fl-force-right">
                     <img src="../images/fluid_logo_small.png" class="fl-force-right" alt="Fluid Logo">
                 </span>
@@ -49,7 +53,7 @@
                                         <fieldset class="fl-force-left">
                                             <legend>Departure:</legend>
                                                 <label for="origin">City</label>
-                                                <input id="origin" list="cities" placeholder="Toronto" autofocus />
+                                                <input id="origin" class="demo-geoLocator-cityInput" list="cities" placeholder="Toronto" autofocus />
                                                 <label for="departure">Departure Date</label>
                                                 <input type="date" id="departure" class="date" value="2011-06-01" />
                                         </fieldset>
@@ -57,8 +61,8 @@
                                     <div class="fl-col">
                                         <fieldset class="fl-force-right">
                                             <legend>Arrival:</legend>
-                                            <label for="origin">City</label>
-                                            <input id="origin" list="cities" placeholder="Montreal" />
+                                            <label for="destination">City</label>
+                                            <input id="destination" list="cities" placeholder="Montreal" />
                                             <label for="return">Return Date</label>
                                             <input type="date" id="return" class="date" value="2011-06-02" />
                                         </fieldset>
@@ -98,11 +102,23 @@
                 </form>
             </section>
         </div>
+        <aside class="current_location centre_block shaddow rounded_corners fl-container-250">
+                <h2 class="heading">Current Location</h2>
+                <ol>
+                    <li>City: <span class="demo-geoLocator-city"></span></li>
+                    <li>Longitude: <span class="demo-geoLocator-longitude"></span></li>
+                    <li>Latitude: <span class="demo-geoLocator-latitude"></span></li>
+                </ol>
+        </aside>
         <footer class="search_packages centre_block shaddow rounded_corners fl-container-250">
             <form>
                 <input type="search" class="search" placeholder="I'd like to go to...">
                 <input type="submit" class="button" value="Search">
             </form>
         </footer>
+        <script>
+            demo.geoLocator("body");
+            // navigator.geolocation.getCurrentPosition(console.log);
+        </script>
     </body>
 </html>

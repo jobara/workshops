@@ -19,9 +19,14 @@ h2 {
     font-size: 1.2em;
 }
 
-header {
+.heading {
     padding: 5px 25px;
     margin-right: -1px; /*covers border on right*/
+    
+    /*round top corners*/
+    -webkit-border-radius: 25px 25px 0px 0px;
+    -moz-border-radius: 25px 25px 0px 0px;
+    border-radius: 25px 25px 0px 0px;
 
     /*background*/
     background: #cedce7; /* Old browsers */
@@ -105,7 +110,8 @@ fieldset > * {
     padding: 1px 8px;
 }
 
-.trip_picker {
+.trip_picker,
+.current_location {
     margin-top: 20px;
     border: 1px solid #D1D1D1;
     
@@ -127,6 +133,10 @@ fieldset > * {
 .trip_picker label {
     display: block;
     font-style: italic;
+}
+
+.current_location ol {
+    margin: 10px;
 }
 
 .search_packages {
