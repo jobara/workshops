@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 Uploader</title>
+        
+        <!--The Fluid Skinning System's style sheets -->
+        <link rel="stylesheet" type="text/css" href="../../../infusion/framework/fss/css/fss-reset-global.css">
+        <link rel="stylesheet" type="text/css" href="../../../infusion/framework/fss/css/fss-layout.css">
+        
+        <!-- MyInfusion.js contains everything you need to use jQuery and the Fluid Infusion Framework -->
+        <script src="../../../infusion/MyInfusion.js"></script>
+        
+        <!-- The HTML5 Uploader's JavaScript code -->
+        <script src="../js/html5-uploader.js"></script>
+    </head>
+    
+    <body>
+        <!-- The Uploader Component's Container -->
+        <div class="d-uploader">
+            <form>
+                <!-- This label is only shown if the browser doesn't support JavaScript or HTML5 -->
+                <label for="d-uploader-addFiles" class="fl-progEnhance-basic">Add File:</label>
+                
+                <!-- This label is hidden visibly, but still available to screen readers and other AT -->
+                <label for="d-uploader-addFiles" class="fl-hidden-accessible fl-progEnhance-enhanced">Add Files:</label>
+                
+                <!-- This is the HTML5 element that holds the list of files selected by the user. -->
+                <input type="file" multiple="" class="d-uploader-filesControl" id="d-uploader-addFiles"/>
+                
+                <!-- This is a much prettier add files button, instead of the ugly input -->
+                <button class="d-uploader-addFiles fl-progEnhance-enhanced">Add</button>
+                
+                <!-- This section will only be visible to the user if they have JavaScript turned on
+                     and an HTML5-capable browser. Otherwise, they'll just see the plain old single-file input -->
+                <div class="fl-progEnhance-enhanced">
+                    
+                    <!-- The template for the Uploader's list of files -->
+                    <div class="d-uploader-queue">
+            
+                        <!-- A container holding all the information about a specific file -->
+                        <div class="d-uploader-file">
+                            <div>
+                                <!-- The file's icon -->
+                                <img class="d-uploader-file-icon" src="file-icon.png" alt="The file's icon" />
+                            </div>
+                
+                            <!-- The file's name -->
+                            <div class="d-uploader-file-name">File name</div>
+                
+                            <div>
+                                <!-- The file's progress bar, showing how much of the file has been uploaded. -->
+                                <progress class="d-uploader-file-progress" value="0" max="100">0%</progress>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button class="d-uploader-upload">Upload</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- A script block, which will run the JavaScript for the Uploader as soon as its markup has been loaded -->
+        <script>
+            demo.uploader(".d-uploader");
+        </script>
+    </body>
+</html>
