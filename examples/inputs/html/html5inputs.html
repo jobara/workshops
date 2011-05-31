@@ -12,12 +12,12 @@
         <script type="text/javascript" src="../js/html5inputs.js"></script>
     </head>
     <body>
-        <div class="trip_picker centre_block shaddow rounded_corners fl-container-650">
-            <header class="heading fl-col-mixed-175">
+        <div class="d-trip-picker d-centre-block d-shaddow d-rounded-corners fl-container-650">
+            <header class="d-heading fl-col-mixed-175">
                 <span class="fl-col-fixed fl-force-right">
                     <img src="../images/fluid_logo_small.png" class="fl-force-right" alt="Fluid Logo">
                 </span>
-                <div class="perforrated fl-col-flex-left">
+                <div class="d-perforrated-edge fl-col-flex-left">
                     <h1>Fluid Travel Finder</h1>
                 </div>
             </header>
@@ -25,7 +25,7 @@
                 <form>
                     <ol>
                         <li class="fl-col-fixed fl-force-right">
-                            <h2 class="contact_info">Contact Information</h2>
+                            <h2 class="d-contact_info">Contact Information</h2>
                             <ol>
                                 <li>
                                     <label for="name">Name</label>
@@ -40,12 +40,12 @@
                                     <input type="email" id="email" placeholder="my@email.com" />
                                 </li>
                                 <li>
-                                    <input type="submit" id="book_trip" class="button" value="Book My Trip">
-                                    <img src="../images/qr_code.png" class="qr_code fl-force-right" alt="qr code to http://fluidproject.org">
+                                    <input type="submit" id="book_trip" class="d-button" value="Book My Trip">
+                                    <img src="../images/qr_code.png" class="d-qr-code fl-force-right" alt="qr code to http://fluidproject.org">
                                 </li>
                             </ol>
                         </li>
-                        <li class="perforrated fl-col-flex-left">
+                        <li class="d-perforrated-edge fl-col-flex-left">
                             <h2>Trip Details</h2>
                             <ol>
                                 <li class="fl-col-flex2 fl-clearfix">
@@ -55,7 +55,7 @@
                                                 <label for="origin">City</label>
                                                 <input id="origin" class="demo-geoLocator-cityInput" list="cities" placeholder="Toronto" autofocus />
                                                 <label for="departure">Departure Date</label>
-                                                <input type="date" id="departure" class="date" value="2011-06-01" />
+                                                <input type="date" id="departure" class="d-date" value="2011-06-01" />
                                         </fieldset>
                                     </div>
                                     <div class="fl-col">
@@ -64,7 +64,7 @@
                                             <label for="destination">City</label>
                                             <input id="destination" list="cities" placeholder="Montreal" />
                                             <label for="return">Return Date</label>
-                                            <input type="date" id="return" class="date" value="2011-06-02" />
+                                            <input type="date" id="return" class="d-date" value="2011-06-02" />
                                         </fieldset>
                                     </div>
                                     <datalist id="cities">
@@ -93,7 +93,7 @@
                                         </li>
                                     </ol>
                                     <span class="fl-col">
-                                        <img src="../images/barcode.png" class="barcode fl-force-right" alt="barcode for http://fluidproject.org">
+                                        <img src="../images/barcode.png" class="d-barcode fl-force-right" alt="barcode for http://fluidproject.org">
                                     <span>
                                 </li>
                             </ol>
@@ -102,18 +102,18 @@
                 </form>
             </section>
         </div>
-        <aside class="current_location centre_block shaddow rounded_corners fl-container-250">
-                <h2 class="heading">Current Location</h2>
+        <aside class="d-current-location d-centre-block d-shaddow d-rounded-corners fl-container-250">
+                <h2 class="d-heading">Current Location</h2>
                 <ol>
                     <li>City: <span class="demo-geoLocator-city"></span></li>
                     <li>Longitude: <span class="demo-geoLocator-longitude"></span></li>
                     <li>Latitude: <span class="demo-geoLocator-latitude"></span></li>
                 </ol>
         </aside>
-        <footer class="search_packages centre_block shaddow rounded_corners fl-container-250">
+        <footer class="d-search-packages d-centre-block d-shaddow d-rounded-corners fl-container-250">
             <form>
-                <input type="search" class="search" placeholder="I'd like to go to...">
-                <input type="submit" class="button" value="Search">
+                <input type="search" class="d-search" placeholder="I'd like to go to...">
+                <input type="submit" class="d-button" value="Search">
             </form>
         </footer>
         <script>
