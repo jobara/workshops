@@ -32,7 +32,7 @@ var demo = demo || {};
         preInitFunction: "demo.uploader.preInit",
         postInitFunction: "demo.uploader.postInit",
         
-        serverURL: "http://localhost/~colin/image-gallery/uploader-server.php?session=12345",
+        serverURL: "../php/server.php",
         
         model: {
             files: []
@@ -81,7 +81,6 @@ var demo = demo || {};
             
             // Grab the next file from the list and send it off to the server.
             var file = that.model.files.pop();
-            that.events.onStart(file);
             var request = demo.uploader.sendRequest(file, that.options.serverURL, that.events);
         };
     };

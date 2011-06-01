@@ -23,7 +23,7 @@
         <div class="d-uploader">
             <p class="d-uploader-instructions">Upload some files...</p>
             
-            <form>
+            <form method= "post" enctype="multipart/form-data" action="uploader-server.php">
                 <!-- This label is only shown if the browser doesn't support JavaScript or HTML5 -->
                 <label for="d-uploader-filesControl" class="fl-progEnhance-basic">Add File:</label>
                 
@@ -31,7 +31,7 @@
                 <label for="d-uploader-filesControl" class="fl-hidden-accessible fl-progEnhance-enhanced">Add Files:</label>
                 
                 <!-- This is the HTML5 element that holds the list of files selected by the user. -->
-                <input type="file" multiple="" class="d-uploader-filesControl fl-progEnhance-basic" id="d-uploader-filesControl"/>
+                <input type="file" multiple="" id="d-uploader-filesControl" class="d-uploader-filesControl fl-progEnhance-basic" />
                 
                 <!-- This section will only be visible to the user if they have JavaScript turned on
                      and an HTML5-capable browser. Otherwise, they'll just see the plain old single-file input -->
