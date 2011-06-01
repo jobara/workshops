@@ -8,12 +8,20 @@
 }
 
 .d-uploader-queue {
-    background: #eee;
     padding: 1em;
 }
 
 .d-uploader-file {
     padding: 0.5em;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #eee;
+    margin: 5px 0px 5px;
+}
+
+.d-uploader-file:nth-child(even) {
+    background: #ddd;
 }
 
 .d-uploader-file.selected {

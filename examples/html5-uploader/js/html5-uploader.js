@@ -149,7 +149,8 @@ var demo = demo || {};
      */
     fluid.defaults("demo.uploader.queue", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
-        finalInitFunction: "demo.uploader.queue.init",        
+        preInitFunction: "demo.uploader.queue.preInit",
+        finalInitFunction: "demo.uploader.queue.finalInit",
         model: {},
                 
         selectors: {
@@ -195,13 +196,15 @@ var demo = demo || {};
         renderOnInit: true
     });
     
-    demo.uploader.queue.init = function (that) {
+    demo.uploader.queue.preInit = function (that) {
         that.addFiles = function (files) {
             that.applier.requestChange("files", files);
             that.refreshView();
             that.selectableContext.refresh();
         };
-        
+    };
+    
+    demo.uploader.queue.finalInit = function (that) {
         // Make the queue keyboard navigable.
         fluid.tabbable(that.container);
         that.selectableContext = fluid.selectable(that.container, {
