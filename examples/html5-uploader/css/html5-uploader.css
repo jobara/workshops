@@ -1,0 +1,41 @@
+.d-uploader-instructions {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+.d-uploader {
+    padding: 2em;
+}
+
+.d-uploader-queue {
+    background: #eee;
+    padding: 1em;
+}
+
+.d-uploader-file {
+    padding: 0.5em;
+}
+
+.d-uploader-file.selected {
+    background: #fff;
+}
+
+button {
+    color: #fff;
+    background: rgb(48,84,158);
+    padding: 5px 10px 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.d-uploader-buttons {
+    margin-left: 17em;
+    margin-top: 1em;
+}
+
+div.d-uploader-file-icon-container.fl-col {
+    width: 20%;
+}
