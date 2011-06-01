@@ -7,10 +7,6 @@
     padding: 2em;
 }
 
-.d-uploader-queue {
-    padding: 1em;
-}
-
 .d-uploader-file {
     padding: 0.5em;
     -moz-border-radius: 10px;
@@ -40,8 +36,8 @@ button {
 }
 
 .d-uploader-buttons {
-    margin-left: 17em;
     margin-top: 1em;
+    float: right;
 }
 
 div.d-uploader-file-icon-container.fl-col {

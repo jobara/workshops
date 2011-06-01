@@ -151,12 +151,9 @@ var demo = demo || {};
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         preInitFunction: "demo.uploader.queue.preInit",
         finalInitFunction: "demo.uploader.queue.finalInit",
-        model: {},
                 
         selectors: {
-            files: ".d-uploader-file",
-            name: ".d-uploader-file-name",
-            progress: ".d-uploader-file-progress"
+            files: ".d-uploader-file"
         },
         
         // This stuff controls the rendering of each file in the queue.
@@ -171,18 +168,18 @@ var demo = demo || {};
                 controlledBy: "files",
                 
                 // Creating an element that matches "files" in our selectors.
-                repeatID: "files",
+                repeatID: "files:",
                 
                 // Name the file variable "file"
-                pathAs: "file",
+                valueAs: "file",
                 
                 // And render out the name of each file.
                 tree: {
-                    name: "${{file}.name}",
-                    progress: {
-                        decorators: {
-                            type: "fluid",
-                            func: "demo.uploader.progress"
+                    decorators: {
+                        type: "fluid",
+                        func: "demo.uploader.fileView",
+                        options: {
+                            model: "{file}"
                         }
                     }
                 }
@@ -217,6 +214,27 @@ var demo = demo || {};
             }
         });
     };
+    
+    fluid.defaults("demo.uploader.fileView", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        
+        selectors: {
+            name: ".d-uploader-file-name",
+            progress: ".d-uploader-file-progress"
+        },
+        
+        protoTree: {
+            name: "${name}",
+            progress: {
+                decorators: {
+                    type: "fluid",
+                    func: "demo.uploader.progress"
+                }
+            }
+        },
+        
+        renderOnInit: true
+    });
     
     /**
      * Progress is responsible for updating the HTML5 progress tag based on events fired from the Uploader.
