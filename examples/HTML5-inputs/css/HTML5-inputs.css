@@ -3,6 +3,15 @@
 .fl-col-mixed-175 .fl-col-flex {margin-left:195px;}
 .fl-col-mixed-175 .fl-col-flex-left {margin-right:195px;}
 
+/*backwards compatability styles*/
+header, section, footer, aside {
+    display: block;
+}
+
+datalist {
+    display: none;
+}
+
 /*Demo CSS*/
 
 body {
