@@ -29,12 +29,12 @@ var demo = demo || {};
      */
     fluid.defaults("demo.uploader", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
-        finalInitFunction: "demo.uploader.init",
+        preInitFunction: "demo.uploader.preInit",
+        postInitFunction: "demo.uploader.postInit",
         
-        serverURL: "http://localhost/~colin/image-gallery/uploader-server.php",
+        serverURL: "../php/server.php",
         
         model: {
-            nextFile: 0,
             files: []
         },
         
@@ -57,7 +57,6 @@ var demo = demo || {};
         
         events: {
             onAdd: null,
-            onRemove: null,
             onStart: null,
             onProgress: null,
             onError: null,
@@ -66,11 +65,12 @@ var demo = demo || {};
         
         listeners: {
             onAdd: "{queue}.addFiles",
-            onRemove: "{queue}.removeFile"
+            onError: "{uploader}.uploadNext",
+            onSuccess: "{uploader}.uploadNext"
         }
     });
     
-    demo.uploader.init = function (that) {
+    demo.uploader.preInit = function (that) {
         /**
          * Uploads the next file in the queue to the server.
          */
@@ -80,15 +80,23 @@ var demo = demo || {};
             }
             
             // Grab the next file from the list and send it off to the server.
-            var file = that.model.files[that.model.nextFile];
-            var request = demo.uploader.sendRequest(file, that.options.serverURL);
+            var file = that.model.files.pop();
+            var request = demo.uploader.sendRequest(file, that.options.serverURL, that.events);
         };
-        
+    };
+    
+    demo.uploader.postInit = function (that) {
         // Listen for any changes on it. When the user adds files, fire the component's onAdd event.
         var filesControl = that.locate("filesControl");
         filesControl.change(function () {
             // Pass along the list of files from the input element.
-            that.events.onAdd.fire(filesControl[0].files);
+            // Unwrap them first, though, because they aren't stored in real array,
+            // so we can't easily manipulate them.
+            var files = [];
+            fluid.each(filesControl[0].files, function (file) {
+                files.push(file);
+            });
+            that.events.onAdd.fire(files);
         });
         
         // We have a nice "Add Files" button instead of the standard, ugly <input type=file> element,
@@ -146,7 +154,8 @@ var demo = demo || {};
                 
         selectors: {
             files: ".d-uploader-file",
-            name: ".d-uploader-file-name"
+            name: ".d-uploader-file-name",
+            progress: ".d-uploader-file-progress"
         },
         
         // This stuff controls the rendering of each file in the queue.
@@ -168,17 +177,42 @@ var demo = demo || {};
                 
                 // And render out the name of each file.
                 tree: {
-                    name: "${{file}.name}"
+                    name: "${{file}.name}",
+                    progress: {
+                        decorators: {
+                            type: "fluid",
+                            func: "demo.uploader.progress"
+                        }
+                    }
                 }
             }]
-        }
+        },
+        
+        styles: {
+            selected: "selected"
+        },
+        
+        renderOnInit: true
     });
     
     demo.uploader.queue.init = function (that) {
         that.addFiles = function (files) {
             that.applier.requestChange("files", files);
             that.refreshView();
+            that.selectableContext.refresh();
         };
+        
+        // Make the queue keyboard navigable.
+        fluid.tabbable(that.container);
+        that.selectableContext = fluid.selectable(that.container, {
+            selectableSelector: that.options.selectors.files,
+            onSelect: function (itemToSelect) {
+                $(itemToSelect).addClass(that.options.styles.selected);
+            },
+            onUnselect: function (selectedItem) {
+                $(selectedItem).removeClass(that.options.styles.selected);
+            }
+        });
     };
     
     /**
@@ -186,14 +220,15 @@ var demo = demo || {};
      */
     fluid.defaults("demo.uploader.progress", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
-        finalInitFunction: "demo.uploader.progress.init"
+        preInitFunction: "demo.uploader.progress.init"
     });
     
     demo.uploader.progress.init = function (that) {
         that.update = function (loaded, total) {
             var percentComplete = 100 / (total / loaded);
             that.container.text(percentComplete + "%");
-            that.container.value(percentComplete);
+            that.container.attr("value", percentComplete);
         };
     };
+    
 })(jQuery);
