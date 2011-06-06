@@ -132,10 +132,13 @@ var demo = demo || {};
 
         // Register success and error listeners.
         xhr.onreadystatechange = function () {
-            if (status === 200) {
-                events.onSuccess.fire(file);
-            } else {
-                events.onError.fire(file);
+            if (xhr.readyState === 4) {
+                var status = xhr.status;            
+                if (status === 200) {
+                    events.onSuccess.fire(file);
+                } else {
+                    events.onError.fire(file);
+                }
             }
         };
         
@@ -143,6 +146,8 @@ var demo = demo || {};
         xhr.upload.onprogress = function (progressEvent) {
             events.onProgress.fire(file, progressEvent.loaded, progressEvent.total);
         };
+        
+        events.onStart.fire(file);
         
         // Send off the request to the server.
         xhr.send(formData);
@@ -258,18 +263,45 @@ var demo = demo || {};
     });
         
     demo.uploader.progress.init = function (that) {
-        that.update = function (file, loaded, total) {
-            if (file.name !== that.model.fileName) {
-                return;
-            }
-            
-            var percentComplete = 100 / (total / loaded);
+        that.uploader = that.options.uploader;
+        
+        that.show = function () {
+            that.container.removeClass("fl-hidden");
+        };
+        
+        that.updateWithPercent = function (percentComplete) {
             that.container.text(percentComplete + "%");
-            that.container.attr("value", percentComplete);
+            that.container.attr("value", percentComplete);    
+        };
+        
+        that.update = function (loaded, total) {
+            var percentComplete = 100 / (total / loaded);
+            that.updateWithPercent(percentComplete);
+        };
+        
+        that.finish = function () {
+            that.updateWithPercent(100);
         };
         
         // Bind a listener to the Uploader's onProgress event.
         // TODO: It should be possible to do this declaratively.
-        that.options.uploader.events.onProgress.addListener(that.update);
+        that.uploader.events.onStart.addListener(function (file) {
+            if (file.name === that.model.fileName) {
+                that.show();
+            }
+        });
+        
+        that.uploader.events.onProgress.addListener(function (file, loaded, total) {
+            if (file.name !== that.model.fileName) {
+                return;
+            }
+            that.update(loaded, total);
+        });
+        
+        that.uploader.events.onSuccess.addListener(function (file) {
+            if (file.name === that.model.fileName) {
+                that.finish();
+            }
+        });
     };
 })(jQuery);
