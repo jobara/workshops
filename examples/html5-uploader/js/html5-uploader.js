@@ -40,11 +40,7 @@ var demo = demo || {};
         
         components: {
             queue: {
-                type: "demo.uploader.queue",
-                container: ".d-uploader-queue", // TODO: Fix me.
-                options: {
-                    model: "{uploader}.model"
-                }
+                type: "demo.uploader.queue"
             }
         },
         
@@ -72,6 +68,13 @@ var demo = demo || {};
     
     demo.uploader.preInit = function (that) {
         /**
+         * Opens the file chooser dialog.
+         */
+        that.chooseFiles = function () {
+            that.filesControl.click();
+        };
+        
+        /**
          * Uploads the next file in the queue to the server.
          */
         that.uploadNext = function () {
@@ -82,18 +85,19 @@ var demo = demo || {};
             // Grab the next file from the list and send it off to the server.
             var file = that.model.files.pop();
             var request = demo.uploader.sendRequest(file, that.options.serverURL, that.events);
-        };
+        };        
     };
     
     demo.uploader.postInit = function (that) {
-        // Listen for any changes on it. When the user adds files, fire the component's onAdd event.
-        var filesControl = that.locate("filesControl");
-        filesControl.change(function () {
+        that.filesControl = that.locate("filesControl");
+        
+        // Listen for any changes on the HTML5 input element. When the user adds files, fire the component's onAdd event.
+        that.filesControl.change(function () {
             // Pass along the list of files from the input element.
             // Unwrap them first, though, because they aren't stored in real array,
             // so we can't easily manipulate them.
             var files = [];
-            fluid.each(filesControl[0].files, function (file) {
+            fluid.each(that.filesControl[0].files, function (file) {
                 files.push(file);
             });
             that.events.onAdd.fire(files);
@@ -102,7 +106,7 @@ var demo = demo || {};
         // We have a nice "Add Files" button instead of the standard, ugly <input type=file> element,
         // so when a user clicks on our button, we need to programmatically click the input.
         that.locate("addFilesButton").click(function () {
-            filesControl.click();
+            that.chooseFiles();
             return false;
         });
         
@@ -153,12 +157,18 @@ var demo = demo || {};
         finalInitFunction: "demo.uploader.queue.finalInit",
                 
         selectors: {
-            files: ".d-uploader-file"
+            emptyQueue: ".d-uploader-empty-queue",
+            files: ".d-uploader-file",
+            selectables: ".d-uploader-queue-selectable",
+            summary: ".d-uploader-file-summary",
+            name: ".d-uploader-file-name",
+            progress: ".d-uploader-file-progress"
         },
         
         // This stuff controls the rendering of each file in the queue.
         repeatingSelectors: ["files"],
-
+        selectorsToIgnore: ["selectables"],
+        
         protoTree: {
             expander: [{
                 // Repeat through each file
@@ -171,15 +181,22 @@ var demo = demo || {};
                 repeatID: "files:",
                 
                 // Name the file variable "file"
-                valueAs: "file",
+                pathAs: "file",
+                valueAs: "fileVal",
                 
                 // And render out the name of each file.
                 tree: {
-                    decorators: {
-                        type: "fluid",
-                        func: "demo.uploader.fileView",
-                        options: {
-                            model: "{file}"
+                    name: "${{file}.name}",
+                    summary: "${{file}.name}",
+                    progress: {
+                        decorators: {
+                            type: "fluid",
+                            func: "demo.uploader.progress",
+                            options: {
+                                model: {
+                                    fileName: "{fileVal}.name"
+                                }
+                            }
                         }
                     }
                 }
@@ -187,69 +204,72 @@ var demo = demo || {};
         },
         
         styles: {
-            selected: "selected"
+            selected: "d-uploader-selected"
         },
         
-        renderOnInit: true
+        listeners: {
+            afterRender: "{queue}.refreshQueue"
+        }        
     });
     
-    demo.uploader.queue.preInit = function (that) {
+    fluid.demands("demo.uploader.queue", "demo.uploader", {
+        container: "{uploader}.options.selectors.queue", // TODO: Why can't I just refer to {uploader}.dom.queue?
+        options: {
+            model: "{uploader}.model"
+        }
+    });
+    
+    demo.uploader.queue.preInit = function (that) {        
         that.addFiles = function (files) {
             that.applier.requestChange("files", files);
             that.refreshView();
+        };
+        
+        that.refreshQueue = function () {
             that.selectableContext.refresh();
+            that.locate("files").removeClass("fl-hidden");
+            fluid.tabbable(that.container);
+            that.container.focus();
         };
     };
     
     demo.uploader.queue.finalInit = function (that) {
         // Make the queue keyboard navigable.
-        fluid.tabbable(that.container);
         that.selectableContext = fluid.selectable(that.container, {
-            selectableSelector: that.options.selectors.files,
+            selectableSelector: that.options.selectors.selectables,
             onSelect: function (itemToSelect) {
-                $(itemToSelect).addClass(that.options.styles.selected);
+                $(itemToSelect).parent().addClass(that.options.styles.selected);
             },
             onUnselect: function (selectedItem) {
-                $(selectedItem).removeClass(that.options.styles.selected);
+                $(selectedItem).parent().removeClass(that.options.styles.selected);
             }
         });
     };
-    
-    fluid.defaults("demo.uploader.fileView", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"],
-        
-        selectors: {
-            name: ".d-uploader-file-name",
-            progress: ".d-uploader-file-progress"
-        },
-        
-        protoTree: {
-            name: "${name}",
-            progress: {
-                decorators: {
-                    type: "fluid",
-                    func: "demo.uploader.progress"
-                }
-            }
-        },
-        
-        renderOnInit: true
-    });
     
     /**
      * Progress is responsible for updating the HTML5 progress tag based on events fired from the Uploader.
      */
     fluid.defaults("demo.uploader.progress", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
-        preInitFunction: "demo.uploader.progress.init"
+        postInitFunction: "demo.uploader.progress.init",
+        
+        // TODO: This is a workaround for a bug in the framework or my own confusion.
+        uploader: "{uploader}"
     });
-    
+        
     demo.uploader.progress.init = function (that) {
-        that.update = function (loaded, total) {
+        that.update = function (file, loaded, total) {
+            if (file.name !== that.model.fileName) {
+                return;
+            }
+            
             var percentComplete = 100 / (total / loaded);
             that.container.text(percentComplete + "%");
             that.container.attr("value", percentComplete);
         };
+        
+        // Bind a listener to the Uploader's onProgress event.
+        // TODO: It should be possible to do this declaratively.
+        that.options.uploader.events.onProgress.addListener(that.update);
     };
-    
 })(jQuery);

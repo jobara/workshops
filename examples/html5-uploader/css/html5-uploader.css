@@ -7,7 +7,7 @@
     padding: 2em;
 }
 
-.d-uploader-file {
+.d-uploader-file-row {
     padding: 0.5em;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -20,8 +20,8 @@
     background: #ddd;
 }
 
-.d-uploader-file.selected {
-    background: #fff;
+.d-uploader .d-uploader-selected {
+    background: rgb(192,192,255);
 }
 
 button {
@@ -41,5 +41,17 @@ button {
 }
 
 div.d-uploader-file-icon-container.fl-col {
-    width: 20%;
+    width: 15%;
+}
+
+.d-uploader-empty-queue .d-uploader-file-icon-container, .d-uploader-file .d-uploader-file-icon-container {
+    padding-top: 6px;
+}
+
+.d-uploader-empty-queue .d-uploader-invitation {
+    padding-top: 12px;
+}
+
+.d-uploader-file .d-uploader-file-name {
+    padding-top: 7px;
 }

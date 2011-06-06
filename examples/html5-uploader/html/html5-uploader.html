@@ -21,7 +21,6 @@
     <body>
         <!-- The Uploader Component's Container -->
         <div class="d-uploader">
-            <p class="d-uploader-instructions">Upload some files...</p>
             
             <form method= "post" enctype="multipart/form-data" action="uploader-server.php">
                 <!-- This label is only shown if the browser doesn't support JavaScript or HTML5 -->
@@ -35,12 +34,27 @@
                 
                 <!-- This section will only be visible to the user if they have JavaScript turned on
                      and an HTML5-capable browser. Otherwise, they'll just see the plain old single-file input -->
-                <div class="fl-progEnhance-enhanced  fl-container-flex30">
+                <div class="fl-progEnhance-enhanced  fl-container-flex40">
                     
                     <!-- The template for the Uploader's list of files -->
                     <div class="d-uploader-queue">
+                        
+                        <!-- An instructional element shown only when the queue is empty -->
+                        <div class="d-uploader-empty-queue d-uploader-file-row fl-col-flex2">
+                            <div class="d-uploader-file-icon-container fl-col">
+                                <img class="d-uploader-add-file-icon" src="../images/add.png" alt="Add file icon">
+                            </div>
+                            <div class="d-uploader-invitation fl-col">
+                                Add some files...
+                            </div>
+                        </div>
+                        
                         <!-- A container holding all the information about a specific file -->
-                        <div class="d-uploader-file fl-col-flex2">
+                        <div class="d-uploader-file d-uploader-file-row fl-col-flex2 fl-hidden">
+                            <div class="d-uploader-file-summary d-uploader-queue-selectable fl-hidden-accessible">
+                                File name
+                            </div>
+                            
                             <div class="d-uploader-file-icon-container fl-col">
                                 <!-- The file's icon -->
                                 <img class="d-uploader-file-icon" src="../images/file-icon.png" alt="The file's icon" />

@@ -37,7 +37,7 @@ function return_error($err_string, $return_err_in_html) {
 
 // Return error if there is no file received
 if (count($_FILES) == 0) {
-	return_error("No file is received at server.", $return_err_in_html);
+	return_error("No file was received at the server.", $return_err_in_html);
 	exit;
 }
 
@@ -46,7 +46,7 @@ foreach ($_FILES as $name => $file_data) {
 
 	// Return error if $temp_dir does not exist
 	if (!file_exists($temp_dir)) {
-		return_error('Temp folder <span style="font: bold">'.$temp_dir.'</span> does not exist.', $return_err_in_html);
+		return_error('The upload folder <span style="font: bold">'.$temp_dir.'</span> does not exist.', $return_err_in_html);
 		exit;
 	}
 	
